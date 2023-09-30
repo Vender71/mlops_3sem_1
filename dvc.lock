@@ -45,13 +45,34 @@ stages:
       size: 152225
     - path: scripts/model/model_preparation.py
       hash: md5
-      md5: bbf70707439536ce2b0ddcbea3a70aef
-      size: 837
+      md5: 6eff30bcee8fbe7122989945c4e5c137
+      size: 881
     params:
       params.yaml:
+        train.iters: 50
         train.seed: 7
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: ab9fda5e60d18248f3cd5658969b43a9
+      md5: a6b7bc4d565d72a12a9f0377192b3322
       size: 853
+  evaluate:
+    cmd: python3 scripts/model/evaluate.py data/prepared/test.csv models/model.pkl
+    deps:
+    - path: data/prepared/test.csv
+      hash: md5
+      md5: bc14f29aab27502bd208a785f629ff6e
+      size: 60930
+    - path: models/model.pkl
+      hash: md5
+      md5: a6b7bc4d565d72a12a9f0377192b3322
+      size: 853
+    - path: scripts/model/evaluate.py
+      hash: md5
+      md5: 22835035e1f1dd675b3dd1536b3d1ef3
+      size: 550
+    outs:
+    - path: evaluate.json
+      hash: md5
+      md5: a5c99f7489716b7cbb87bba1203f2893
+      size: 16

@@ -18,6 +18,7 @@ f_output = os.path.join("models", sys.argv[2])
 
 params = yaml.safe_load(open("params.yaml"))["train"]
 p_seed = params["seed"]
+p_iters = params["iters"]
 
 # Загрузка данных
 df = pd.read_csv(f_input)
@@ -27,7 +28,7 @@ X = df[["temp", "air_humidity", "pressure"]]
 y = df["label"]
 
 # Работа с моделью
-model = LogisticRegression(random_state=p_seed)
+model = LogisticRegression(random_state=p_seed, max_iter=p_iters)
 model.fit(X, y)
 
 # Сохранение модели
